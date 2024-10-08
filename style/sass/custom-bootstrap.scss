@@ -1,0 +1,29 @@
+//Ne pas oublier d'importer nos partials Sass au besoin
+//Bien qu'il serait préférable d'utiliser des partials, vous ne serez pas pénalisé si vous ne le faites pas :)
+@use "variables" as v;
+
+//Modification des variables
+$primary: v.$primary;
+$secondary: v.$secondary;
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+//Créer sa propre map pour ajouter des couleurs custom
+$custom-colors:(
+    "ma-couleur-custom": v.$maCouleur,
+    "ma-couleur-custom-foncee": darken(v.$maCouleur, 10)
+);
+
+//Fusionner notre map avec celle que nous voulons modifier
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+//Regrouper des classes bootstrap grâce à @extend
+.img-card{
+    @extend .card-img-top;
+    @extend .rounded-circle;
+    @extend .shadow;
+    @extend .img-thumbnail;
+}
